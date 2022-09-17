@@ -193,7 +193,12 @@ call plug#end()
 
 " _. Color - Once again to set colorscheme after plug#end {{{
 if count(g:vimified_packages, 'color')
-	colorscheme molokai
+	" During installation the molokai colorscheme might not be avalable
+	if filereadable(globpath(&rtp, 'colors/molokai.vim'))
+		colorscheme molokai
+	else
+		colorscheme default
+	endif
 else
 	colorscheme default
 endif
