@@ -1,6 +1,10 @@
 # pvimified
-Vim configuration of mine
+Same as zaiste/vimified but based on vim-plug instead of a Vundle. Plugins list re-worked for my needs.
 
-Same as zaiste/vimified but based on vim-plug instead of a Vundle.
+## How to install
 
-Plugins list re-worked for my needs.
+### For lazy people
+
+Copy/Paste this line in your CLI:
+
+    curl -L https://raw.github.com/vcargats/pvimified/master/install.sh | sh
