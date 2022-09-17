@@ -54,5 +54,5 @@ fi
 
 echo "Enjoy!"
 
-vim +PlugInstall 2>/dev/null
+vim +PlugInstall
 
