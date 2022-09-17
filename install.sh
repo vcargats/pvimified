@@ -46,9 +46,9 @@ if [ ! -d "bundle" ]; then
     mkdir -p tmp/backup tmp/swap tmp/undo
 fi
 
-if [ ! -d "bundle/vim-plug" ]; then
+if [ ! -f "autoload/plug.vim" ]; then
     echo "Then, we install vim-plug (https://github.com/junegunn/vim-plug)."
-    curl -fLo bundle/vim-plug/plug.vim --create-dirs \
+    curl -fLo autoload/plug.vim --create-dirs \
       https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 fi
 
