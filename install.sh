@@ -40,11 +40,8 @@ else
     create_symlinks
 fi
 
-if [ ! -d "bundle" ]; then
-    echo "Now, we will create a separate directory to store the bundles Vim will use."
-    mkdir bundle
-    mkdir -p tmp/backup tmp/swap tmp/undo
-fi
+echo "Now, we will create a separate directories for backup, swap and undo."
+mkdir -p tmp/backup tmp/swap tmp/undo
 
 if [ ! -f "autoload/plug.vim" ]; then
     echo "Then, we install vim-plug (https://github.com/junegunn/vim-plug)."
@@ -54,5 +51,5 @@ fi
 
 echo "Enjoy!"
 
-vim +PlugInstall +qall 2>/dev/null
+vim -es -u vimrc -i NONE -c "PlugInstall" -c "qa"
 
