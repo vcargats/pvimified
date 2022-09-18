@@ -94,10 +94,48 @@ noremap <up>    <nop>
 noremap <down>  <nop>
 noremap <right> <nop>
 
-" clear highlight after search
-noremap <silent><Leader>/ :nohls<CR>
 " better ESC
 inoremap <C-k> <Esc>
+" Emacs bindings in command line mode
+cnoremap <c-a> <home>
+cnoremap <c-e> <end>
+
+" Splits ,v and ,h to open new splits (vertical and horizontal)
+nnoremap <leader>v <C-w>v<C-w>l
+nnoremap <leader>h <C-w>s<C-w>j
+" Easy splitted window navigation
+noremap <C-h>  <C-w>h
+noremap <C-j>  <C-w>j
+noremap <C-k>  <C-w>k
+noremap <C-l>  <C-w>l
+" }}}
+
+" _ Vim {{{
+augroup ft_vim
+    au!
+
+    au FileType vim setlocal foldmethod=marker
+    au FileType help setlocal textwidth=78
+    au BufWinEnter *.txt if &ft == 'help' | wincmd L | endif
+augroup END
+" }}}
+"
+" . folding {{{
+set foldlevelstart=0
+set foldmethod=syntax
+
+" Space to toggle folds.
+nnoremap <space> za
+vnoremap <space> za
+
+" Make zO recursively open whatever top level fold we're in, no matter where the
+" cursor happens to be.
+nnoremap zO zCzO
+
+" Use ,z to "focus" the current fold.
+nnoremap <leader>z zMzvzz
+
+exec ':so '.s:dotvim.'/functions/my_fold_text.vim'
 " }}}
 
 " _ backups {{{
@@ -132,17 +170,25 @@ set cpo+=J
 " }}}
 
 " Settings {{{
+set modelines=0
+set noeol
+if exists('+relativenumber')
+  set relativenumber
+endif
+set numberwidth=3
+set winwidth=83
 set autoread
 set backspace=indent,eol,start
 set binary
 set cinoptions=:0,(s,u0,U1,g0,t0
-set completeopt=menuone,preview
 set encoding=utf-8
 set hidden
 set history=1000
 set incsearch
 set laststatus=2
 set list
+set showcmd
+set wildmenu
 
 " Don't redraw while executing macros
 set nolazyredraw
@@ -156,6 +202,8 @@ set showbreak=↪
 set notimeout
 set ttimeout
 set ttimeoutlen=10
+
+set completeopt=longest,menuone,preview
 
 " Trailing whitespace {{{
 " Only shown when not in insert mode so I don't go insane.
@@ -176,6 +224,9 @@ set smartcase
 set showmatch
 set gdefault
 set hlsearch
+
+" clear search matching
+noremap <leader><space> :noh<cr>:call clearmatches()<cr>
 
 " Using a tagged release; wildcard allowed (requires git 1.9.2 or above)
 " Plug 'fatih/vim-go', { 'tag': '*' }
